@@ -24,7 +24,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Cart
                         </a>
-                        <div class="dropdown-menu md-mt-2" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu mt-2 md-mt-0" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
