@@ -6,7 +6,7 @@
           <div class="card-body p-2">
             <div class="row">
               <div class="col-md-4">
-                <img alt="Vue logo" src="../assets/images/logo_2.png" class="w-100">
+                <img alt="Vue logo" src="../assets/images/logo_1.png" class="w-100">
               </div>
               <div class="col-md-8 pt-2">
                 <h4 class="card-title text-info text-uppercase">Special title treatment</h4>
