@@ -35,7 +35,13 @@
                 <p class="card-text">
                   With supporting text below as a natural lead-in to additional content.
                 </p>
-                <span class="btn btn-primary mx-1">Add To Cart</span>
+                <div class="pb-3">
+                  <span class="btn btn-outline-info py-1">5</span>
+                  <span class="btn btn-info py-2 px-2 ml-2"></span>
+                  <span class="btn btn-primary py-2 px-2 ml-2"></span>
+                  <span class="btn btn-danger py-2 px-2 ml-2"></span>
+                  <span class="btn btn-primary mx-2">Add To Cart</span>
+                </div>
               </div>
             </div>
           </div>
