@@ -10,7 +10,7 @@
 
             <div class="collapse navbar-collapse md-ml-5" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <router-link to="/">
+                    <router-link to="/product">
                         <li class="nav-item" @click="changeState">
                             <span class="nav-link">Products</span>
                         </li>
@@ -26,7 +26,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Cart ({{ cartProduct.length }})
                         </a>
-                        <div class="dropdown-menu mt-2 md-mt-0" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu mt-2 md-mt-0" aria-labelledby="navbarDropdown" @click="$event.stopPropagation()">
                             <div v-for="cart in cartProduct" :key="cart.product.id">
                                 <div class="d-flex justify-content-between px-2">
                                     <div class="mr-1"> 
@@ -53,7 +53,7 @@
                                     <b v-if="totalPrice">$ {{ totalPrice }}</b>
                                     <b v-else>$ 0</b>
                                 </span>
-                                <span class="btn btn-danger py-1 px-2 float-right mr-1">Clear Cart</span>
+                                <span class="btn btn-danger py-1 px-2 float-right mr-1" @click="clearCart">Clear Cart</span>
                             </div>
                         </div>
                     </li>
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
     methods:{
         changeState(){
@@ -75,14 +75,23 @@ export default {
             this.$store.dispatch('getProducts')
         },
         removeCart(id){
-            this.$store.commit('removeCart',id)
-            console.log( this.$store.commit('removeCart',id) );
+            this.$store.dispatch('removeCart',id)
+        },
+        clearCart(){
+            this.$store.commit('clearCart')
         }
     },
-    computed: mapState([
-        'cartProduct',
-        'totalPrice'
-    ])
+    mounted(){
+        // this.$store.dispatch('')
+    },
+    computed:{
+        ...mapState([
+            'cartProduct'
+        ]),
+        ...mapGetters([
+            'totalPrice'
+        ])
+    } 
 }
 </script>
 

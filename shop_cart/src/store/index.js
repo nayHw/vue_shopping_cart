@@ -9,13 +9,16 @@ export default new Vuex.Store({
     products:[],
     show:false,
     cartProduct:[],
-    totalPrice:0,
+    notifications:[],
+    relatedProducts:[]
   },
   getters: {
     totalPrice(state){
-      return state.cartProduct.forEach( item => {
-        state.totalPrice += item.quantity * item.product.price
+      let totalPrice = 0; 
+      state.cartProduct.forEach( item => {
+        totalPrice += item.quantity * item.product.price
       })
+      return totalPrice;
     }
   },
   mutations: {
@@ -41,9 +44,34 @@ export default new Vuex.Store({
         product,
         quantity
       })
+      state.notifications.push({
+        type: 'alert-success',
+        message: 'Product Add to Cart!',
+        id: (Math.random().toString(36) + Date.now().toString(36)).substr(2)
+      })
     },
-    removeCart(){
-      return console.log('remove')
+    removeCart(state, id){
+      state.cartProduct = state.cartProduct.filter( item => {
+        return item.product.id !== id
+      })
+      state.notifications.push({
+        type: 'alert-info',
+        message: 'Product remove from Cart!',
+        id: (Math.random().toString(36) + Date.now().toString(36)).substr(2)
+      })
+    },
+    clearCart(state){
+      state.cartProduct = []
+      state.notifications.push({
+        type: 'alert-danger',
+        message: 'All Product remove from Cart!',
+        id: (Math.random().toString(36) + Date.now().toString(36)).substr(2)
+      })
+    },
+    removeNoti(state, noti){
+      state.notifications = state.notifications.filter(item => {
+        return item.id !== noti.id;
+      })
     }
   },
   actions: {
@@ -52,10 +80,22 @@ export default new Vuex.Store({
       .then( res => commit('setProduct', res.data))
       .catch(err => console.log(err) )
     },
-    listByCategroy({commit}, category){
+    listByCategroy({commit,state}, category){
       axios.get(`https://fakestoreapi.com/products/category/${category}`)
-      .then( res => commit('setProduct', res.data))
+      .then( res => {
+        commit('setProduct', res.data)
+        state.relatedProducts = res.data
+      })
       .catch( err => console.log(err) )
+    },
+    addToCart({commit},{product,quantity}){
+      commit('addToCart',{product,quantity})
+    },
+    removeCart({commit}, id){
+      commit('removeCart', id)
+    },
+    removeNoti({commit}, noti){
+      commit('removeNoti', noti)
     }
   },
   modules: {
