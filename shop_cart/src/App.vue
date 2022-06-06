@@ -2,17 +2,17 @@
   <div id="app">
     <NavigationView />
     <router-view class='mt-2'/>
-    <NoitificationView />
+    <NotificationList />
   </div>
 </template>
 
 <script>
 import NavigationView from './pages/NavigationView.vue'
-import NoitificationView from './pages/NotificationView.vue'
+import NotificationList from './pages/NotificationList.vue'
 export default {
   components:{
     NavigationView,
-    NoitificationView
+    NotificationList
   }
 
 }

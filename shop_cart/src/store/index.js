@@ -80,11 +80,13 @@ export default new Vuex.Store({
       .then( res => commit('setProduct', res.data))
       .catch(err => console.log(err) )
     },
-    listByCategroy({commit,state}, category){
-      axios.get(`https://fakestoreapi.com/products/category/${category}`)
+    listByCategroy({commit,state}, product){
+      axios.get(`https://fakestoreapi.com/products/category/${product.category}`)
       .then( res => {
         commit('setProduct', res.data)
-        state.relatedProducts = res.data
+        state.relatedProducts = res.data.filter( items => {
+          return items.id !== product.id
+        })
       })
       .catch( err => console.log(err) )
     },
