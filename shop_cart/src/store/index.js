@@ -78,7 +78,7 @@ export default new Vuex.Store({
     getProducts({commit}){
       axios.get('https://fakestoreapi.com/products')
       .then( res => commit('setProduct', res.data))
-      .catch(err => console.log(err) )
+      .catch(err => { return err } )
     },
     listByCategroy({commit,state}, product){
       axios.get(`https://fakestoreapi.com/products/category/${product.category}`)
@@ -88,7 +88,7 @@ export default new Vuex.Store({
           return items.id !== product.id
         })
       })
-      .catch( err => console.log(err) )
+      .catch( err => { return err } )
     },
     addToCart({commit},{product,quantity}){
       commit('addToCart',{product,quantity})

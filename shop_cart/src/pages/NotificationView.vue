@@ -18,7 +18,6 @@ export default {
     created(){
         this.timeout = setTimeout(() => {
             this.$store.dispatch('removeNoti',this.noti)
-            console.log(this.noti)
         }, 3000);
     },
     beforeDestroy(){
